@@ -18,6 +18,13 @@ else:
 response = client.access_secret_version(name=name).payload.data.decode("UTF-8")
 env.read_env(io.StringIO(response.payload.data.decode("UTF-8")))
 
+INSTALLED_APPS = [
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+]
+
+MIDDLEWARE = []
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",

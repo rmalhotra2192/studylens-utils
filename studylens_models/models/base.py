@@ -1,5 +1,12 @@
+import os
+import django
+from django.conf import settings
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "studylens_models.settings")
+django.setup()
+
 from django.db import models
-from resources.models import Resource
+from resources import Resource
 
 
 class ExternalDataProvider(models.Model):
