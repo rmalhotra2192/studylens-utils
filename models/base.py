@@ -2,7 +2,6 @@ from django.db import models
 from resources.models import Resource
 
 
-# Create your models here.
 class ExternalDataProvider(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(null=True)
