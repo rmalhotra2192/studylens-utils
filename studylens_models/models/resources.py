@@ -22,6 +22,9 @@ class Resource(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        app_label = "studylens_models"
+
 
 class Book(Resource):
     isbn = models.CharField(max_length=13, unique=True, null=True)
@@ -31,6 +34,9 @@ class Book(Resource):
     last_published_date = models.DateField(null=True)
     page_count = models.IntegerField(null=True)
     language = models.CharField(max_length=128, null=True, default="English")
+
+    class Meta:
+        app_label = "studylens_models"
 
 
 class Course(Resource):
@@ -70,6 +76,9 @@ class Course(Resource):
     course_end_date = models.DateField(null=True)
     language = models.CharField(max_length=128, null=True, default="English")
 
+    class Meta:
+        app_label = "studylens_models"
+
 
 class Video(Resource):
     video_id = models.CharField(max_length=128, unique=True, null=True)
@@ -80,3 +89,6 @@ class Video(Resource):
     language = models.CharField(max_length=128, null=True, default="English")
     course_instance = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
     course_sequence = models.IntegerField(null=True)
+
+    class Meta:
+        app_label = "studylens_models"

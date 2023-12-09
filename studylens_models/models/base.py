@@ -14,6 +14,9 @@ class ExternalDataProvider(models.Model):
     description = models.TextField(null=True)
     logo = models.CharField(max_length=512, null=True)
 
+    class Meta:
+        app_label = "studylens_models"
+
 
 class ExternalUrl(models.Model):
     SERVICE_TYPES = [
@@ -30,6 +33,9 @@ class ExternalUrl(models.Model):
         choices=SERVICE_TYPES, max_length=128, null=True
     )
 
+    class Meta:
+        app_label = "studylens_models"
+
 
 class Thumbnail(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
@@ -38,6 +44,9 @@ class Thumbnail(models.Model):
     )
     url = models.CharField(max_length=500)
     size = models.IntegerChoices("size", "small medium large extra_large")
+
+    class Meta:
+        app_label = "studylens_models"
 
 
 class Metric(models.Model):
@@ -57,7 +66,13 @@ class Metric(models.Model):
     metric_value = models.CharField(max_length=128, null=True)  # e.g. "4.5, 100, etc."
     metric_max = models.CharField(max_length=128, null=True)  # e.g. "5, 100, etc."
 
+    class Meta:
+        app_label = "studylens_models"
+
 
 class Tag(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     tag = models.CharField(max_length=128)
+
+    class Meta:
+        app_label = "studylens_models"
