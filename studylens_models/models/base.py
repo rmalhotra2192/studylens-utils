@@ -1,5 +1,5 @@
 from django.db import models
-from resources import Resource
+from ..models.resources import Resource
 
 
 class ExternalDataProvider(models.Model):
