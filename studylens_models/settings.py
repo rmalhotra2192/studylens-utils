@@ -6,7 +6,7 @@ from google.cloud import secretmanager
 env = environ.Env()
 client = secretmanager.SecretManagerServiceClient()
 
-if os.getenv("environment") == "prod":
+if os.getenv("ENV") == "prod":
     name = "projects/{}/secrets/{}/versions/latest".format(
         os.getenv("GOOGLE_CLOUD_PROJECT"), "prod-secrets"
     )
