@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="studylens-models",
-    version="0.1",
+    name="studylens-utils",
+    version="0.2",
     author="Rishabh Malhotra",
     author_email="therishabhmalhotra@gmail.com",
     description="Internal Backend Models for Studylens Project, defined as seperately installable python package for re-use between web backend and data ingestion pipelines. ",
@@ -21,5 +21,5 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.9",
 )
