@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="studylens-utils",
-    version="0.3",
+    version="0.3.1",
     author="Rishabh Malhotra",
     author_email="therishabhmalhotra@gmail.com",
     description="Internal Backend Models for Studylens Project, defined as seperately installable python package for re-use between web backend and data ingestion pipelines. ",
