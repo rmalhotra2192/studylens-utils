@@ -2,7 +2,7 @@ import os
 import django
 from django.conf import settings
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "studylens_models.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 django.setup()
 
 from django.db import models
