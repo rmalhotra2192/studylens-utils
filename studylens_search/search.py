@@ -161,6 +161,6 @@ class Qdrant_DB:
         client = QdrantClient(url="http://localhost", port=Config_Qdrant.port)
         return client.search(
             collection_name=collection,
-            query_vector=open_ai_api.send_search_embeddings_request(query),
+            query_vector=open_ai_api.embedding_request(for_query=True, query=query),
             limit=limit,
         )
