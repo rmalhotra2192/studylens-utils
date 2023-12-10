@@ -9,8 +9,6 @@ from .config import Config_OpenAI, Config_Qdrant
 
 
 class OPEN_AI_API:
-    client: openai.OpenAI
-
     def __init__(self, openai_api_key: str):
         self.client = openai.OpenAI(api_key=openai_api_key)
 
