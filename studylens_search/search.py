@@ -9,13 +9,14 @@ from .config import Config_OpenAI, Config_Qdrant
 
 
 class OPEN_AI_API:
-    openai_api_key: str
+    client: openai.OpenAI
+
+    def __init__(self, openai_api_key: str):
+        self.client = openai.OpenAI(api_key=openai_api_key)
 
     def completion_request(self, book_info) -> [list, Any]:
         try:
-            client = openai.OpenAI(api_key=self.openai_api_key)
-
-            response = client.chat.completions.create(
+            response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo-1106",
                 response_format={"type": "json_object"},
                 messages=[
@@ -38,7 +39,6 @@ class OPEN_AI_API:
     def embedding_request(
         self, resource_json=None, resource_type=None, for_query=False, query=None
     ) -> [list, Any]:
-        client = openai.OpenAI(api_key=self.openai_api_key)
         embedding_model = "text-embedding-ada-002"
 
         if for_query:
@@ -46,7 +46,7 @@ class OPEN_AI_API:
         else:
             request_input = self.generate_embedding_text(resource_json, resource_type)
 
-        response = client.embeddings.create(
+        response = self.client.embeddings.create(
             input=request_input,
             model=embedding_model,
         )
