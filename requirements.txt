@@ -2,3 +2,5 @@ Django==4.2.6
 google-cloud-secret-manager
 django-environ
 psycopg2-binary==2.9.9
+qdrant-client
+openai
