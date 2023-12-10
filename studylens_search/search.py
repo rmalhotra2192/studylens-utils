@@ -9,9 +9,11 @@ from .config import Config_OpenAI, Config_Qdrant
 
 
 class OPEN_AI_API:
+    openai_api_key: str
+
     def completion_request(self, book_info) -> [list, Any]:
         try:
-            client = openai.OpenAI()
+            client = openai.OpenAI(api_key=self.openai_api_key)
 
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo-1106",
@@ -36,7 +38,7 @@ class OPEN_AI_API:
     def embedding_request(
         self, resource_json=None, resource_type=None, for_query=False, query=None
     ) -> [list, Any]:
-        client = openai.OpenAI()
+        client = openai.OpenAI(api_key=self.openai_api_key)
         embedding_model = "text-embedding-ada-002"
 
         if for_query:
