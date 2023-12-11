@@ -105,6 +105,11 @@ class OPEN_AI_API:
 
 
 class Qdrant_DB:
+    def __init__(self, url: str, api_key: str):
+        self.url = url
+        self.api_key = api_key
+        self.client = QdrantClient(url=url, api_key=api_key)
+
     def create_collection(self, collection: str):
         collection_body = {
             "vectors": {
@@ -114,9 +119,7 @@ class Qdrant_DB:
             }
         }
 
-        qdrant_url = (
-            f"{Config_Qdrant.host}:{Config_Qdrant.port}/collections/{collection}"
-        )
+        qdrant_url = f"{self.url}/collections/{collection}"
         headers = {"Content-Type": "application/json"}
         response = requests.put(qdrant_url, json=collection_body, headers=headers)
         print(
@@ -131,9 +134,7 @@ class Qdrant_DB:
         batch_size: int = 100,
         open_ai_api: OPEN_AI_API = None,
     ) -> None:
-        client = QdrantClient(url="http://localhost", port=Config_Qdrant.port)
-
-        collections = client.get_collections()
+        collections = self.client.get_collections()
         if collection not in collections:
             self.create_collection(collection)
 
@@ -150,17 +151,24 @@ class Qdrant_DB:
             payloads.append(payload)
             vectors.append(vector)
 
-        client.upsert(
+        self.client.upsert(
             collection_name=collection,
             points=QdrantBatch(ids=ids, payloads=payloads, vectors=vectors),
         )
 
     def search(
-        self, collection: str, query: str, open_ai_api: OPEN_AI_API = None, limit=10
+        self,
+        collection: str,
+        query: str,
+        open_ai_api: OPEN_AI_API = None,
+        limit=10,
+        offset=0,
+        query_filter=None,
     ):
-        client = QdrantClient(url="http://localhost", port=Config_Qdrant.port)
-        return client.search(
+        return self.client.search(
             collection_name=collection,
             query_vector=open_ai_api.embedding_request(for_query=True, query=query),
             limit=limit,
+            offset=offset,
+            query_filter=query_filter,
         )
